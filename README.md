@@ -49,14 +49,13 @@ duo:
 * To run the server via the docker image, write your config file as per above into its own directory, and name it `duo-bot.yml`.  Mount that directory to `/secrets/` in the docker image.
 
 ```bash
-mkdir -p /tmp/duo-bot-config
 cat > /tmp/duo-bot-config/duo-bot.yml << EOF
 duo:
   host: "api-???.duosecurity.com"
   ikey: "???"
   skey: "???"
 EOF
-docker run --rm -v /tmp/duo-bot-config:/secrets/ palantirtechnologies/duo-bot:(<RELEASE>|latest)
+docker run --rm -v /tmp/duo-bot-config:/secrets/ -p <LOCAL PORT>:8080 palantirtechnologies/duo-bot:(<RELEASE>|latest)
 ```
 
 ## Applications
