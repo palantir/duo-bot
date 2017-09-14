@@ -1,6 +1,6 @@
 # The circleCI golang:1.9 docker image doesn't have other archs installed
 docker-golang: &docker-golang
-  working_directory: /go/src/github.com/palantir/bouncer
+  working_directory: /go/src/github.com/palantir/duo-bot
   docker:
     - image: golang:1.9
       environment:
@@ -9,6 +9,16 @@ docker-golang: &docker-golang
 # Shared tasks
 define-artifact-dir: &define-artifacts-dir
   run: echo "export ARTIFACT_STORE=/tmp/artifacts/${CIRCLE_PROJECT_REPONAME}-${TAG_NAME}-tests" >> $BASH_ENV
+
+install-docker-client: &install-docker-client
+  run:
+    name: Install docker client
+    command: |
+      set -x
+      VER="17.03.1-ce"
+      curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+      tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+      mv /tmp/docker/* /usr/bin
 
 mkdir-artifacts-dir: &mkdir-artifacts-dir
   run: mkdir -p "${ARTIFACT_STORE}"
@@ -33,8 +43,9 @@ jobs:
 
       - run: go version
       - run: ./godelw version
-      - run: go install $(./godelw packages)
 
+      - setup_remote_docker
+      - *install-docker-client
       - run: ./circleci/build.sh
 
       - *store-test-results
@@ -55,6 +66,8 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker
+      - *install-docker-client
       - run: ./circleci/publish.sh
 
 workflows:

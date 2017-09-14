@@ -1,6 +1,8 @@
-# duo-bot
+# duo-bot [![Download](https://api.bintray.com/packages/palantir/releases/duo-bot/images/download.svg)]
 
 A simple app to keep temporary state on arbitrary keys, and if that key has had someone accept a [DUO MFA](https://duo.com/product) action against it.
+
+Duo-bot is packaged as a go binary in bintray (link above) as well as a dockerhub image: `palantirtechnologies/duo-bot`
 
 ## State
 

@@ -9,9 +9,11 @@ set -eux
 # The machine pre section makes sure we've got the latest from apt
 cp /etc/ssl/certs/ca-certificates.crt .
 
+version=$(./godelw project-version)
+
 docker build \
-    -t palantir/duo-bot:${VERSION} \
-    --build-arg VERSION=$VERSION \
+    -t palantirtechnologies/duo-bot:${version} \
+    --build-arg VERSION=$version \
     -f Dockerfile \
     .
 
