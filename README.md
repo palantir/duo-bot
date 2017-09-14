@@ -1,4 +1,4 @@
-# duo-bot [![Download](https://api.bintray.com/packages/palantir/releases/duo-bot/images/download.svg)]
+# duo-bot [![Download](https://api.bintray.com/packages/palantir/releases/duo-bot/images/download.svg)](https://bintray.com/palantir/releases/duo-bot/_latestVersion)
 
 A simple app to keep temporary state on arbitrary keys, and if that key has had someone accept a [DUO MFA](https://duo.com/product) action against it.
 
