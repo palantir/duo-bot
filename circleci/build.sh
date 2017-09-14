@@ -5,11 +5,11 @@ set -eux
 ./godelw verify --apply=false --junit-output="${ARTIFACT_STORE}/tests.xml"
 ./godelw dist
 
+version=$(./godelw project-version)
+
 # We need to trust duosecurity.com, so let's just use system CA certs
 # The machine pre section makes sure we've got the latest from apt
 cp /etc/ssl/certs/ca-certificates.crt .
-
-version=$(./godelw project-version)
 
 docker build \
     -t palantirtechnologies/duo-bot:${version} \
