@@ -20,6 +20,21 @@ install-docker-client: &install-docker-client
       tar -xz -C /tmp -f /tmp/docker-$VER.tgz
       mv /tmp/docker/* /usr/bin
 
+build-docker-image: &build-docker-image
+  run:
+    name: Build docker image
+    command: |
+      set -x
+      version=$(./godelw project-version)
+
+      cp /etc/ssl/certs/ca-certificates.crt .
+      docker build \
+        -t palantirtechnologies/duo-bot \
+        --build-arg VERSION=${version} \
+        -f Dockerfile \
+        .
+      rm -f ca-certificates.crt
+
 mkdir-artifacts-dir: &mkdir-artifacts-dir
   run: mkdir -p "${ARTIFACT_STORE}"
 
@@ -46,7 +61,9 @@ jobs:
 
       - setup_remote_docker
       - *install-docker-client
-      - run: ./circleci/build.sh
+      - run: ./godelw verify --apply=false --junit-output="${ARTIFACT_STORE}/tests.xml"
+      - run: ./godelw dist
+      - *build-docker-image
 
       - *store-test-results
 
@@ -66,9 +83,11 @@ jobs:
 
     steps:
       - checkout
+      - run: ./godelw publish bintray --url https://api.bintray.com --subject palantir --repository releases --user "$BINTRAY_USERNAME" --password "$BINTRAY_PASSWORD" --publish --downloads-list duo-bot
       - setup_remote_docker
-      - *install-docker-client
-      - run: ./circleci/publish.sh
+      - *install-docker-client 
+      - *build-docker-image
+      - run: ./publish-docker.sh
 
 workflows:
   version: 2
