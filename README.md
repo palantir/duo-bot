@@ -2,7 +2,7 @@
 
 A simple app to keep temporary state on arbitrary keys, and if that key has had someone accept a [DUO MFA](https://duo.com/product) action against it.
 
-Duo-bot is packaged as a go binary in bintray (link above) as well as a dockerhub image: `palantirtechnologies/duo-bot`
+Duo-bot is packaged as a go binary in bintray (link above) as well as a dockerhub image (details on running server below) `palantirtechnologies/duo-bot`
 
 ## State
 
@@ -46,6 +46,18 @@ duo:
 ```
 
 * Note too that the server doesn't support SSL for its http listener.  The expectation here is that you run an ELB, nginx proxy or something else in front of duo-bot which terminates client SSL connections.
+* To run the server via the docker image, write your config file as per above into its own directory, and name it `duo-bot.yml`.  Mount that directory to `/secrets/` in the docker image.
+
+```bash
+mkdir -p /tmp/duo-bot-config
+cat > /tmp/duo-bot-config/duo-bot.yml << EOF
+duo:
+  host: "api-???.duosecurity.com"
+  ikey: "???"
+  skey: "???"
+EOF
+docker run --rm -v /tmp/duo-bot-config:/secrets/ palantirtechnologies/duo-bot:(<RELEASE>|latest)
+```
 
 ## Applications
 
