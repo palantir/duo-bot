@@ -59,9 +59,10 @@ jobs:
       - run: go version
       - run: ./godelw version
 
+      - run: ./godelw verify --apply=false --junit-output="${ARTIFACT_STORE}/tests.xml"
       - setup_remote_docker
       - *install-docker-client
-      - run: ./godelw verify --apply=false --junit-output="${ARTIFACT_STORE}/tests.xml"
+
       - run: ./godelw dist
       - *build-docker-image
 
@@ -83,9 +84,10 @@ jobs:
 
     steps:
       - checkout
-      - run: ./godelw publish bintray --url https://api.bintray.com --subject palantir --repository releases --user "$BINTRAY_USERNAME" --password "$BINTRAY_PASSWORD" --publish --downloads-list duo-bot
       - setup_remote_docker
       - *install-docker-client 
+
+      - run: ./godelw publish bintray --url https://api.bintray.com --subject palantir --repository releases --user "$BINTRAY_USERNAME" --password "$BINTRAY_PASSWORD" --publish --downloads-list duo-bot
       - *build-docker-image
       - run: ./publish-docker.sh
 
