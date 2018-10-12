@@ -90,10 +90,12 @@ func (s *Server) promptHandler(c echo.Context, factor string) error {
 	curPrompt := s.state[key]
 
 	meta := new(MetadataPayload)
-	err := c.Bind(meta)
-	if err != nil {
-		msg := errors.Wrap(err, "error binding extra metadata object, skipping")
-		logger.Warn(msg)
+	if c.Request().ContentLength != 0 {
+		err := c.Bind(meta)
+		if err != nil {
+			msg := errors.Wrap(err, "error binding extra metadata object, skipping")
+			logger.Warn(msg)
+		}
 	}
 
 	pc, err := newPromptConfig(user, factor, device, passcode, async)
