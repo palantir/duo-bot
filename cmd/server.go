@@ -56,7 +56,7 @@ var serverCmd = &cobra.Command{
 			log.Fatal("duo.skey not set in config")
 		}
 
-		log.Debugf("%t %t", viper.Get("server.addr"), version)
+		log.Debugf("%s %s", viper.Get("server.addr"), version)
 
 		srv, err := server.New(serverAddr, version, duoHost, duoIkey, duoSkey)
 
