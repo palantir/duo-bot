@@ -18,13 +18,11 @@ import (
 	"time"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/duosecurity/duo_api_golang"
 	"github.com/duosecurity/duo_api_golang/authapi"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/pkg/errors"
-
 	"github.com/palantir/duo-bot/state"
+	"github.com/pkg/errors"
 )
 
 // A Server is duo-bot run in server mode, the only mode

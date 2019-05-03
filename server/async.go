@@ -18,9 +18,8 @@ import (
 	"time"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/pkg/errors"
-
 	"github.com/palantir/duo-bot/state"
+	"github.com/pkg/errors"
 )
 
 const (

@@ -16,7 +16,6 @@ package main
 
 import (
 	log "github.com/Sirupsen/logrus"
-
 	"github.com/palantir/duo-bot/cmd"
 )
 
