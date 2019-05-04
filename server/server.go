@@ -18,7 +18,7 @@ import (
 	"time"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/duosecurity/duo_api_golang"
+	duoapi "github.com/duosecurity/duo_api_golang"
 	"github.com/duosecurity/duo_api_golang/authapi"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"

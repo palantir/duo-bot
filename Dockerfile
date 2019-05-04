@@ -4,7 +4,7 @@ ARG VERSION
 
 ADD ca-certificates.crt /etc/ssl/certs/
 
-ADD build/${VERSION}/linux-amd64/duo-bot /
+ADD out/build/duo-bot/${VERSION}/linux-amd64/duo-bot /
 
 EXPOSE 8080
 
