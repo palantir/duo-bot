@@ -98,6 +98,16 @@
   revision = "db1efb556f84b25a0a13a04aad883943538ad2e0"
 
 [[projects]]
+  name = "github.com/palantir/duo-bot"
+  packages = [
+    "cmd",
+    "server",
+    "state",
+  ]
+  revision = "1f63a26801dd7b8a98d39f52b02865763f9fc6c5"
+  version = "0.4.5"
+
+[[projects]]
   name = "github.com/pelletier/go-buffruneio"
   packages = ["."]
   revision = "c37440a7cf42ac63b919c752ca73a85067e05992"
@@ -211,6 +221,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f74d2f5b5aa4280fa1ab962961b180d8480bb006cb9db7b730cf27ac791d62cc"
+  inputs-digest = "492de2cf50d755c7ba8fc11df3f9395c63b5b908dfccee045a93cb0050e1ac73"
   solver-name = "gps-cdcl"
   solver-version = 1
